@@ -11,9 +11,9 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <javaElement handleIdentifier="=azlocprov/&lt;com.vuze.plugins.azlocprov"/>
         <javaElement handleIdentifier="=azlocprov/&lt;com.maxmind.geoip"/>
+        <javaElement handleIdentifier="=azlocprov/&lt;com.vuze.plugins.azlocprov"/>
+        <javaElement handleIdentifier="=azlocprov/&lt;com.vuze.plugins.azlocprov.internat"/>
         <javaElement handleIdentifier="=azlocprov/&lt;com.vuze.plugins.azlocprov.images"/>
     </selectedElements>
-    <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
 </jardesc>
