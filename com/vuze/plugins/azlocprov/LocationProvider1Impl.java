@@ -39,8 +39,8 @@ import com.maxmind.geoip.Country;
 import com.maxmind.geoip.LookupService;
 
 public class
-LocationProviderImpl 
-	extends LocationProvider
+LocationProvider1Impl 
+	extends LocationProviderBase
 {
 	private static final int[][] FLAG_SIZES = {{18,12},{25,15}};
 	
@@ -57,7 +57,7 @@ LocationProviderImpl
 	private Set<String>	failed_dbs = new HashSet<String>();
 	
 	protected
-	LocationProviderImpl(
+	LocationProvider1Impl(
 		String		_plugin_version,
 		File		_plugin_dir )
 	{
@@ -277,8 +277,8 @@ LocationProviderImpl
 		return( getClass().getClassLoader().getResourceAsStream( "com/vuze/plugins/azlocprov/images/" + flag_file_dir + "/" + flag_file_name ));
 	}
 	
-	
-	protected void
+	@Override
+	public void
 	destroy()
 	{
 		is_destroyed = true;
@@ -310,7 +310,7 @@ LocationProviderImpl
 		String[]	args )
 	{
 		try{
-			LocationProviderImpl prov = new LocationProviderImpl( "", new File( "C:\\Projects\\development\\azlocprov" ));
+			LocationProvider1Impl prov = new LocationProvider1Impl( "", new File( "C:\\Projects\\development\\azlocprov" ));
 			
 			System.out.println( prov.getCountry( InetAddress.getByName( "www.vuze.com" )).getCode());
 			System.out.println( prov.getCountry( InetAddress.getByName( "2001:4860:4001:801::1011" )).getCode());

@@ -25,8 +25,6 @@ package com.vuze.plugins.azlocprov;
 
 import java.io.File;
 
-import com.biglybt.core.config.COConfigurationManager;
-import com.biglybt.core.util.Constants;
 import com.biglybt.pif.PluginException;
 import com.biglybt.pif.PluginInterface;
 import com.biglybt.pif.UnloadablePlugin;
@@ -37,7 +35,7 @@ LocationProviderPlugin
 {
 	private PluginInterface		plugin_interface;
 	
-	private LocationProviderImpl	provider;
+	private LocationProviderBase	provider;
 	
 	@Override
 	public void
@@ -46,12 +44,12 @@ LocationProviderPlugin
 	
 		throws PluginException 
 	{
-		applyPatch1();
-		applyPatch2();
+		//applyPatch1();
+		//applyPatch2();
 		
 		plugin_interface = _pi;
 		
-		provider = new LocationProviderImpl( plugin_interface.getPluginVersion(), new File( plugin_interface.getPluginDirectoryName()));
+		provider = new LocationProvider2Impl( plugin_interface.getPluginVersion(), new File( plugin_interface.getPluginDirectoryName()));
 		
 		plugin_interface.getUtilities().addLocationProvider( provider );
 	}
@@ -74,6 +72,7 @@ LocationProviderPlugin
 		}
 	}
 	
+	/*
 	private void
 	applyPatch1()
 	{
@@ -184,4 +183,5 @@ LocationProviderPlugin
 		}catch( Throwable e ){			
 		}
 	}
+	*/
 }
