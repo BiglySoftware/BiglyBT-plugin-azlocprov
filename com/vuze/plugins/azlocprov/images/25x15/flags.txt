@@ -3,3 +3,4 @@ Flag images found at http://www.hahn-hotel.com/flags/
 18/06/2013: Serbian flag added from http://icondrawer.com/flag-icons.php (link added to plugin page)
 11/08/2013: Montenegro flag added from http://icondrawer.com/flag-icons.php
 06/09/2013: Georgian flag updated from http://icondrawer.com/flag-icons.php
+20/03/2018: Tanzanian flag updated from http://icondrawer.com/flag-icons.php
