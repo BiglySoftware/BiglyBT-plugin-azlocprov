@@ -307,6 +307,8 @@ LocationProvider2Impl
 			System.out.println( prov.getCountryFlagForIP( InetAddress.getByName( "bbc.co.uk" ), 0 ));
 			System.out.println( prov.getCountryFlagForIP( InetAddress.getByName( "bbc.co.uk" ), 1 ));
 			
+			System.out.println( prov.getCountry( InetAddress.getByName( "193.37.254.27" )).getCountry().getIsoCode());
+			
 		}catch( Throwable e ){
 			
 			e.printStackTrace();
