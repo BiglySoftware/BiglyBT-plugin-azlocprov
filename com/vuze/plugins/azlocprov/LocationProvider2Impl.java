@@ -76,7 +76,7 @@ LocationProvider2Impl
 	public long
 	getCapabilities()
 	{
-		return( CAP_COUNTY_BY_IP | CAP_FLAG_BY_IP | CAP_ISO3166_BY_IP );
+		return( CAP_COUNTRY_BY_IP | CAP_FLAG_BY_IP | CAP_ISO3166_BY_IP | CAP_FLAG_BY_CC );
 	}
 	
 	private DatabaseReader
@@ -246,6 +246,15 @@ LocationProvider2Impl
 			return( null );
 		}
 		
+		return( getCountryFlagForISO3166Code(code, size_index ));
+	}
+	
+	@Override
+	public InputStream 
+	getCountryFlagForISO3166Code(
+		String 		code, 
+		int 		size_index)
+	{
 		String flag_file_dir 	= (size_index==0?"18x12":"25x15");
 		String flag_file_name 	= code.toLowerCase() + ".png";
 		
