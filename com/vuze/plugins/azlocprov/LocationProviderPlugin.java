@@ -24,7 +24,13 @@
 package com.vuze.plugins.azlocprov;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import com.biglybt.core.config.COConfigurationManager;
+import com.biglybt.core.util.Constants;
+import com.biglybt.core.util.TrackersUtil;
 import com.biglybt.pif.PluginException;
 import com.biglybt.pif.PluginInterface;
 import com.biglybt.pif.UnloadablePlugin;
@@ -46,6 +52,7 @@ LocationProviderPlugin
 	{
 		//applyPatch1();
 		//applyPatch2();
+		applyPatch3();
 		
 		plugin_interface = _pi;
 		
@@ -184,4 +191,35 @@ LocationProviderPlugin
 		}
 	}
 	*/
+	
+	private void
+	applyPatch3()
+	{
+		// 1800: MultiTrackerEditor is borked if the user has NO existing tracker templates. Fix is to 	
+		// add a default one
+		
+		try{
+			if ( Constants.getCurrentVersion().startsWith( "1.8.0." )){
+														
+				TrackersUtil tu = TrackersUtil.getInstance();
+						
+				Map<String,List<List<String>>> mts = tu.getMultiTrackers();
+						
+				if ( mts.isEmpty()){
+							
+					tu.addMultiTracker( "Default", new ArrayList<>());
+				}
+				
+				String sel = COConfigurationManager.getStringParameter( "multitrackereditor.last.selection", "" );
+				
+				if ( sel.isEmpty()){
+					
+					COConfigurationManager.setParameter( "multitrackereditor.last.selection", "Default" );
+				}
+			}
+		}catch( Throwable e ){
+			
+		}
+	}
+	
 }
