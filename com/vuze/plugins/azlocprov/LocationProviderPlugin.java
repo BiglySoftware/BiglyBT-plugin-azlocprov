@@ -50,12 +50,10 @@ LocationProviderPlugin
 	
 		throws PluginException 
 	{
-		//applyPatch1();
-		//applyPatch2();
-		applyPatch3();
-		
 		plugin_interface = _pi;
-		
+
+		applyPatch1();
+				
 		provider = new LocationProvider2Impl( plugin_interface.getPluginVersion(), new File( plugin_interface.getPluginDirectoryName()));
 		
 		plugin_interface.getUtilities().addLocationProvider( provider );
@@ -79,121 +77,8 @@ LocationProviderPlugin
 		}
 	}
 	
-	/*
 	private void
 	applyPatch1()
-	{
-		// 5100 bug with simple torrent being saved to a FILE named 'Vuze Downloads'
-		// installer has been fixed to create the folder to prevent the issue with new users
-		// for existing users look to see if the problem has been encountered and recover things a bit
-		
-		try{
-			if ( Constants.getCurrentVersion().startsWith( "5.1.0." )){
-				
-				if ( COConfigurationManager.getIntParameter( "azlocprov.patch5100.1.applied", 0 ) == 0 ){
-					
-					int	patch_result = 99;
-					
-					try{
-						File save_path = new File( COConfigurationManager.getStringParameter( "Default save path" ));
-					
-						if ( !save_path.exists()){
-							
-							save_path.mkdirs();
-							
-							patch_result = 1;
-							
-						}else if ( save_path.isFile()){
-							
-							String str = save_path.getAbsolutePath();
-							
-							if ( !str.endsWith( "2" )){
-								
-								save_path = new File( str + "2" );
-								
-								if ( save_path.mkdirs()){
-									
-									COConfigurationManager.setParameter( "Default save path", save_path.getAbsolutePath());
-									
-									patch_result = 2;
-									
-								}else{
-									
-									patch_result = 3;
-								}
-							}else{
-								
-								patch_result = 4;
-							}
-						}else{
-							
-							patch_result = 5;
-						}
-					}finally{
-						
-						COConfigurationManager.setParameter( "azlocprov.patch5100.1.applied", patch_result );
-						
-						COConfigurationManager.save();
-					}
-				}
-			}
-		}catch( Throwable e ){
-			
-		}
-	}
-	
-	private void
-	applyPatch2()
-	{
-		// OSX Mavericks Nap prevention
-		
-		try{
-			if ( Constants.getCurrentVersion().startsWith( "5.1.0." ) && Constants.isOSX ){
-				
-				if ( COConfigurationManager.getIntParameter( "azlocprov.patch5100.2.applied", 0 ) == 0 ){
-					
-					int	patch_result = 99;
-					
-					try{
-						
-				      	if ( new File( "/usr/bin/defaults" ).exists()){
-			        		
-				        	String[] command = {
-				        		"/usr/bin/defaults",
-				        		"write",
-				        		"com.azureus.vuze",
-				        		"NSAppSleepDisabled",
-				        		"-bool",
-				        		"YES"
-				        	};
-				        	
-				        	Runtime.getRuntime().exec( command );
-				        	
-				        	patch_result = 1;
-				        	
-			        	}else{
-			        		
-			        		patch_result = 2;
-			        	}
-					}catch( Throwable e ){
-						
-						patch_result = 3;
-						
-					}finally{
-						
-						COConfigurationManager.setParameter( "azlocprov.patch5100.2.applied", patch_result );
-						
-						COConfigurationManager.save();
-					}
-				}
-			}
-		}catch( Throwable e ){			
-		}
-	}
-	*/
-	
-	private void
-	applyPatch3()
 	{
 		// 1800: MultiTrackerEditor is borked if the user has NO existing tracker templates. Fix is to 	
 		// add a default one
@@ -221,5 +106,4 @@ LocationProviderPlugin
 			
 		}
 	}
-	
 }
