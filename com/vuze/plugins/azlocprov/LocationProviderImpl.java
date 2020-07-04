@@ -38,7 +38,7 @@ import com.maxmind.geoip2.record.Country;
 
 
 public class
-LocationProvider2Impl 
+LocationProviderImpl 
 	extends LocationProviderBase
 {
 	private static final int[][] FLAG_SIZES = {{18,12},{25,15}};
@@ -55,7 +55,7 @@ LocationProvider2Impl
 	private Set<String>	failed_dbs = new HashSet<String>();
 	
 	protected
-	LocationProvider2Impl(
+	LocationProviderImpl(
 		String		_plugin_version,
 		File		_plugin_dir )
 	{
@@ -308,7 +308,7 @@ LocationProvider2Impl
 		String[]	args )
 	{
 		try{
-			LocationProvider2Impl prov = new LocationProvider2Impl( "", new File( "C:\\Users\\Paul\\git\\BiglyBT-plugin-azlocprov" ));
+			LocationProviderImpl prov = new LocationProviderImpl( "", new File( "C:\\Users\\Paul\\git\\BiglyBT-plugin-azlocprov" ));
 			
 			System.out.println( prov.getCountry( InetAddress.getByName( "www.vuze.com" )).getCountry().getIsoCode());
 			System.out.println( prov.getCountry( InetAddress.getByName( "2001:4860:4001:801::1011" )).getCountry().getIsoCode());
