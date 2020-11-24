@@ -99,9 +99,7 @@ LocationProviderImpl
 			DatabaseReader reader = new DatabaseReader.Builder(db_file).build();
 			
 			if ( reader != null ){
-				
-				System.out.println( "Loaded " + db_file );
-				
+								
 				return( reader );
 			}
 		}catch( Throwable e ){
@@ -121,15 +119,25 @@ LocationProviderImpl
 		DatabaseReader result = db_reader;
 			
 		if ( result == null ){
-							
-			if ( plugin_version.length() > 0 && Constants.compareVersions( plugin_version, "0.1.1" ) > 0 ){
+					
+			synchronized( this ){
 				
-				result = db_reader = getDBReader( "GeoLite2-Country_" + plugin_version + ".mmdb" );
-			}
-			
-			if ( result == null ){
-			
-				result = db_reader = getDBReader( "GeoLite2-Country.mmdb" );
+				result = db_reader;
+
+				if ( result == null ){
+					
+					if ( plugin_version.length() > 0 && Constants.compareVersions( plugin_version, "0.1.1" ) > 0 ){
+						
+						result = getDBReader( "GeoLite2-Country_" + plugin_version + ".mmdb" );
+					}
+					
+					if ( result == null ){
+					
+						result = getDBReader( "GeoLite2-Country.mmdb" );
+					}
+					
+					db_reader = result;
+				}
 			}
 		}
 		
